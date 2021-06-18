@@ -1,0 +1,4 @@
+//import package
+WebDriverManager.chromedriver.setup();
+WebDriver driver= new ChromerDriver();
+driver.get("Url");
