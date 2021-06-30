@@ -1,0 +1,25 @@
+package learn;
+
+import java.util.ArrayList;
+import java.util.Set;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+public class windowTest {
+public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver=new ChromeDriver();
+		driver.get("url");
+		driver.manage().window().maximize();
+		Thread.sleep(3000);
+		//open home page
+    	driver.findElement(By.xpath("//button[text()='Open Home Page']")).click();
+       //  count total number of open window
+    driver.findElement(By.xpath("//button[text()='Open Multiple Windows']")).click();
+  Set<String> allWindowHandles = driver.getWindowHandles();
+    	ArrayList<String> tabs = new ArrayList<String>(allWindowHandles);
+    	System.out.println("No. of tabs: " + tabs.size());
+    	}
+}
