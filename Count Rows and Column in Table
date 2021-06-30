@@ -1,0 +1,23 @@
+package learn;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import java.util.List;
+import io.github.bonigarcia.wdm.WebDriverManager;
+public class TableTest {
+	public static void main(String[] args) throws InterruptedException 
+	{
+		// TODO Auto-generated method stub
+     WebDriverManager.chromedriver().setup();
+	WebDriver driver=new ChromeDriver();
+	driver.get("url");
+	driver.manage().window().maximize();
+WebElement TogetRows = driver.findElement(By.xpath("//table[@id='table_id']"));
+List<WebElement>TotalRowsList = TogetRows.findElements(By.tagName("tr"));
+List<WebElement>TotalRowsList1 = TogetRows.findElements(By.tagName("th"));
+System.out.println("Total number of Col in the table are : "+ TotalRowsList1.size());
+System.out.println("Total number of Rows in the table are : "+ TotalRowsList.size());
+}
+}
