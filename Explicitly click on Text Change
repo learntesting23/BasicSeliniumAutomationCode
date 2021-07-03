@@ -1,0 +1,32 @@
+package learn;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class ExplictlyDemo {
+
+	@SuppressWarnings("deprecation")
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		 WebDriverManager.chromedriver().setup();
+			WebDriver driver=new ChromeDriver();
+			driver.get("url");
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(driver,30);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Click ME!']")));
+			driver.findElement(By.xpath("//button[text()='Click ME!']")).click();
+			Thread.sleep(3000);
+			driver.switchTo().alert().accept();
+
+			System.out.println("Suceess");
+			driver.quit();
+			}
+
+}
