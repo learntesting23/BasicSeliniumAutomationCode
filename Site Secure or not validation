@@ -1,0 +1,50 @@
+package learn;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class UrlValidation {
+
+	public static void main(String[] args) throws Throwable {
+		// TODO Auto-generated method stub
+		
+  WebDriverManager.chromedriver().setup();
+   WebDriver driver = new ChromeDriver();
+   driver.get("https://rightguruji.com/");
+   driver.manage().window().maximize();
+   Thread.sleep(5000);
+   String expectedurl = "https://" ;
+   String actualUrl= driver.getCurrentUrl();
+   if (actualUrl.startsWith(expectedurl))
+   {
+   System.out.println("Current url Secure::" +expectedurl );
+   }
+   else
+   {
+ System.out.println("Current Url Not Secure");
+   }
+//Title Validation
+   String expectedtitle = "Latest Govt Jobs 2022 | arkari Exam 2022 | Government Job in Rajasthan | Govt sector jobs 2022 | Upcoming Govt exam 2022 - RightGuruji";
+   
+
+   String actualtitle= driver.getTitle();
+   if(expectedtitle.equalsIgnoreCase(actualtitle))
+   {
+   System.out.println("Title Matched::" +expectedtitle+ "  " +actualtitle);
+   } 
+   
+   else
+   {
+	   System.out.println("Title Not mached");
+   }
+   */
+   //Page source
+  String pagesource= driver.getPageSource();
+  System.out.println(pagesource);
+   Thread.sleep(5000);
+   driver.close();
+	}
+
+}
