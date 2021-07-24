@@ -1,0 +1,47 @@
+package learn;
+
+import java.util.ArrayList;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class GmailMultiple {
+
+	public static void main(String[] args)throws Throwable {
+		// TODO Auto-generated method stub
+   WebDriverManager.chromedriver().setup();
+   WebDriver driver = new ChromeDriver();
+   driver.get("https://accounts.google.com/signin/v2/identifier?service=accountsettings&continue=https%3A%2F%2Fmyaccount.google.com%2F%3Fpli%3D1&ec=GAlAwAE&flowName=GlifWebSignIn&flowEntry=AddSession");
+   driver.manage().window().maximize();
+   Thread.sleep(5000);
+   driver.findElement(By.linkText("Help")).click();
+   driver.findElement(By.linkText("Privacy")).click();
+   driver.findElement(By.linkText("Terms")).click();
+   Thread.sleep(5000);
+   //store collection of all window into array list class
+   ArrayList<String> sr=new ArrayList<String>(driver.getWindowHandles());
+   //switch to help child window and verify
+  String helpwidowtitle= driver.switchTo().window(sr.get(3)).getTitle();
+  System.out.println(helpwidowtitle);
+  Thread.sleep(5000);
+  driver.close();
+  String privacypolicytitle= driver.switchTo().window(sr.get(2)).getTitle();
+  System.out.println(privacypolicytitle);
+  Thread.sleep(5000);
+  driver.close();
+  String termswindowtitle= driver.switchTo().window(sr.get(1)).getTitle();
+  System.out.println(termswindowtitle);
+  Thread.sleep(5000);
+  driver.close();
+  String maintitle= driver.switchTo().window(sr.get(0)).getTitle();
+  System.out.println(maintitle);
+  Thread.sleep(5000);
+  driver.close();
+ 
+   
+	}
+
+}
