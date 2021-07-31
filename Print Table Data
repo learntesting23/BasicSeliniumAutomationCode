@@ -1,0 +1,72 @@
+package learn;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class TableBootstarp {
+
+	public static void main(String[] args)throws Throwable {
+		// TODO Auto-generated method stub
+		 WebDriverManager.chromedriver().setup();
+			WebDriver driver=new ChromeDriver();
+			driver.get("https://mdbootstrap.com/docs/b4/jquery/tables/pagination/");
+			driver.manage().window().maximize();
+			Thread.sleep(5000);
+			//store table into web element
+			JavascriptExecutor js= (JavascriptExecutor)driver;
+			js.executeScript("window.location='https://mdbootstrap.com/docs/b4/jquery/tables/pagination/'");
+			js.executeScript("window.scrollBy(0,1100)");
+ 
+
+			WebElement table=driver.findElement(By.xpath("//table[@id='dtBasicExample']"));
+			//capture any row column text data
+	       String tablecell1 = driver.findElement(By.xpath("//table[@id='dtBasicExample']/tbody/tr[3]/td[2]")).getText();
+	       System.out.println(tablecell1);
+			Thread.sleep(5000);
+			String tablecell2 = driver.findElement(By.xpath("//table[@id='dtBasicExample']/tbody/tr[3]/td[3]")).getText();
+		     System.out.println(tablecell2);
+			Thread.sleep(5000);
+			//select
+			Select s1=new Select(driver.findElement(By.xpath("//select[@name='dtBasicExample_length']")));
+			s1.selectByValue("100");	
+
+			
+			
+			//get collection of rows in a table
+			List<WebElement> rows =table.findElements(By.tagName("tr"));
+			System.out.println("No of rowws in a table:::"+rows.size());
+			//iterate all rows
+			for(WebElement eachrow:rows)
+			{
+				//get collection of column in each row
+				List<WebElement> cols =eachrow.findElements(By.tagName("td"));
+				//iterate all cells
+				for(WebElement eachcell:cols)
+				{
+					if(eachcell.getText().isEmpty())
+					{
+						//click on next
+						driver.findElement(By.xpath("//li[@id='dtBasicExample_next']//a[1]")).click();
+					}
+				
+				System.out.print("\t" +eachcell.getText());
+				
+				}
+					
+				System.out.println();
+				System.out.println("----------------------------------------------------------------------------------------------");
+			}
+Thread.sleep(5000);
+driver.close();
+	}
+}
+
+
